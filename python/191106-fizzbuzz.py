@@ -25,3 +25,13 @@ for i in range(0, 101):
         print("fizz"*(i % 3 == 0) + "buzz"*(i % 5 == 0))
     else:
         print(i)
+
+
+
+
+
+# 3 
+
+["fizzbuzz" if i % 15 == 0 else "fizz" if i % 3 == 0 else "buzz" if i % 5 == 0 else i for i in range(0, 101)]
+
+
