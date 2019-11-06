@@ -9,3 +9,13 @@
 # 3. create the list containing the result by exploiting list comprehesion method. 
 
 
+for i in range(0, 101): 
+    if i % 15 == 0: 
+        print("fizzbuzz")
+    elif i % 5 == 0:
+        print("buzz")
+    elif i % 3 == 0:
+        print("fizz")
+
+
+
