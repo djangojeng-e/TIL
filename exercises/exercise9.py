@@ -7,7 +7,7 @@ while True:
     generate_number = random.randint(1,9)
     user_number = input("Please enter your number : ")
     if user_number == 'exit':
-        break8
+        break
     elif generate_number == int(user_number):
         print("You have guessed exactly right number.")
         tries += 1
