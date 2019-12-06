@@ -145,3 +145,60 @@ intro(Firstname="John", Lastname="Wood", Email="johnwood@hotmail.com", Country="
 
 
 
+# When Python exists, all the memory is not de-allocated.
+
+
+
+
+
+1. When Python exists, especially those Python modules which are having circular references to other objects or the objects that are referenced from the global namespaces are not always de-allocated or freeed. 
+2. It is impossible to de-allocate those portions of memeory that are reserved by the C library. 
+3. On exit, because of having its own efficient clean up mechanism, Python would try to de-allocate/destroy every other objects. 
+
+
+
+# Dictionary in Python 
+
+
+
+Dictionary is a built-in datatype in python. It defines one-to-one relationship between keys and values. It contains pair of keys and their corresponding values. Dictionaries are indexed by keys 
+
+
+
+# Inheritance in Python
+
+
+
+Inheritance allows one class to gain all the member(attributes and methods) of another class. **Inheritance provides code reusability , makes it easier to create and maintain an application**
+
+
+
+The class that another class inherits from is called super-class and the class that is inheriting from other classes is called a derived / child class. 
+
+
+
+**Inheritance have different types**
+
+
+
+1. **Single Inheritance** - a delivered class acquires the members of a single Super class 
+2. **Multi-level Inheritance** - a derived class d1 in inherited from base class base1, and d2 are inherited from base2. 
+3. **Hierarchial Inheritance ** - From one base class you can inherit any number of child classes 
+4. **Multiple Inheritance** - a derived class is inherited from more than one base class. 
+
+
+
+# Encapsulation in Python 
+
+
+
+
+
+**Encapsulation** means binding the code and the data together. A representative example of encapsulation in python is class that binds variables and methods(functions) that contain code blocks. 
+
+
+
+
+
+
+
