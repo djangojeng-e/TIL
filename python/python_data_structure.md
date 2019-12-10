@@ -422,3 +422,111 @@ print(copied_dictionary)
 | pop()    | Removes the element with the specified key                |
 | values() | Returns a list of all the values in the dictionary        |
 
+
+
+
+
+# Sets 
+
+
+
+Python includes a data type for sets. A set is an unordered collection with no duplicate elements. Basic uses include membership testing and eliminating duplicate entries. Set objects also support mathematical operations like union, intersection, difference and symmetric difference. 
+
+
+
+```python
+basket = {'apple', 'orange', 'apple', 'pear', 'orange', 'banana'}
+print(basket)   # Confirms that the duplicates have been removed. 
+
+print('orange' in basket)
+
+print('crabgrass' in basket)
+
+# Demonstrate set operations on unique letters from two words. 
+
+a = set('abracadabra')
+b = set('alacazam')
+
+print(a)        # Unique letters in a 
+
+print(a - b)    # letters in a but not in b 
+
+print(a | b)    # letters in a or b or both 
+
+print(a & b)    # letters in both a and b
+
+print( a ^ b)   # letters in a or b but not both 
+
+
+# Set supports list comprehension. 
+
+a = {x for x in 'abracadabra' if x not in 'abc'}
+print(a)
+```
+
+
+
+# Looping Techniques 
+
+
+
+```python
+# When looping through dictionaries, 
+# the key and corresponding value can be retrieved at 
+# the same time using items() method 
+
+knights = {'gallahad': 'the pure', 'robin': 'the brave'}
+for k, v in knights.items():
+    print(k,v)
+
+# When looping through a sequence, the position index and 
+# corresponding value can be retrieved at the same time
+# using the enumerate() function 
+
+for i, v in enumerate(['tic', 'tac', 'toc']):
+    print(i,v)
+
+
+```
+
+
+
+
+
+# zip() function 
+
+
+
+Remember **zip(), reversed() and sorted()**
+
+
+
+
+
+```python
+# To loop over two or more sequences at the same time, 
+# the entries can be paired with the zip() function. 
+
+questions = ['name', 'quest', 'favourite color']
+answers = ['lancelot', 'the holy grail', 'blue']
+for q, a in zip(questions, answers):
+    print('What is your{0}? It is {1}'.format(q, a))
+
+# To loop over a sequence in reverse, first specify the sequence 
+# in a forward direction and then call the reversed() function 
+# 
+
+for i in reversed(range(1, 10, 2)):
+    print(i)
+
+# To loop over a sequence in sorted order, use the sorted() function which 
+# returns a new sorted list while leaving the source unaltered. 
+
+basket = ['apple', 'orange', 'apple', 'pear', 'orange', 'banana']
+for i in sorted(set(basket)):
+    print(i)
+
+
+
+```
+
