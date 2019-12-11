@@ -12,3 +12,12 @@ print(b)
 local_name = fibo.fib
 a = local_name(500)
 print(a)
+
+a = [1,2,3,4,5]
+
+fib = fibo.fib
+print(dir())
+
+import builtins
+print(dir(builtins))
+
