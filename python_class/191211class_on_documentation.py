@@ -146,5 +146,73 @@ class Bag:
 
 class Mapping: 
     def __init__(self, iterable):    
+        self.items_list = []
+        self.__update(iterable)
+
+    def update(self, iterable): 
+        for item in iterable:
+            self.items_list.append(item)
+
+    __update = update   # private copy of original update() method 
+
+class MappingSubclass(Mapping):
+    
+    def update(self, keys, values):
+        # provides new signature for update()
+        # but does not break __init__()
+        for item in zip(keys, values):
+            self.items_list.append(item)
+           
+
+# Iterators 
+
+
+# most container objects can be looped over using a for statement. 
+
+for element in [1, 2, 3]:  # Loop over a list 
+    print(element)
+for element in (1, 2, 3):  # Loop over a tuple 
+    print(element)
+for key in {'one': 1, 'two': 2}: # Loop over a dictionary 
+    print(key)
+# for line in open("myfile.txt"):
+#   print(line, end='')
+
+s = 'abc'
+it = iter(s)
+print(it)
+print(next(it))
+print(next(it))
+print(next(it))
+# print(next(it))
+
+
+class Reverse: 
+    """Iterator for looping over a sequence backwards."""
+    def __init__(self, data):
+        self.data = data
+        self.index = len(data)
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.index == 0:
+            raise StopIteration
+        self.index = self.index - 1 
+        return self.data[self.index]
+
+rev = Reverse('spam')
+print(iter(rev))
+
+for char in rev:
+    print(char)
+
+def reverse(data):
+    for index in range(len(data)-1, -1, -1): 
+        yield data[index]
+
+for char in reverse('golf'):
+    print(char)
 
 
