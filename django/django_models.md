@@ -343,3 +343,154 @@ place = models.OneToOneField(Place, on_delete=models.CASCADE, verbose_name="rela
 
 
 
+The power of relational databases lies in relating tables to each other. 
+
+Django offers way to define the three most common types of database relationships 
+
+**many-to-one, many-to-many and one-to-one**
+
+
+
+## Many-to-one realtionships 
+
+
+
+**django.db.models.Foreignkey** including it as a class attribute of your model. 
+
+
+
+**ForeignKey** requires a positional argument : the class to which the model is related. 
+
+
+
+E.g. a car manufacturer makes multiple cars. However, one car has only one Manufacturer. 
+
+
+
+In a class definition, 
+
+
+
+
+
+```python
+from django.db import models 
+
+class Manufacturer(models.Model): 
+    #.. 
+    pass 
+
+class Car(models.Model):
+    manufacturer = models.ForeignKey(Manufacturer, on_delete= models.CASCADE)
+    
+```
+
+
+
+It's suggested that the name of a ForeignKey field be the name of the model, the lowercase.. You can call the field whatever you want. like below. 
+
+
+
+```python
+class Car(models.Model):
+    company_that_makes_it = models.ForeignKey(Manufacturer, on_delete=models.CASCADE,)
+    
+```
+
+
+
+
+
+
+
+## Many-to-many relationships 
+
+
+
+E.g. If a Pizza has multiple Topping objects - that is a Topping can be on multiple pizzas and each pizza has multiple toppings - that could be represented as below. 
+
+
+
+
+
+Use **models.ManyToManyField(Topping)**
+
+
+
+
+
+```Python
+from django.db import models 
+
+class Topping(models.Model): 
+    #.. 
+    pass 
+
+class Pizza(models.Model): 
+    #.. 
+    toppings = models.ManyToManyField(Topping)
+    
+    # toppings represent plural form to indicate the set of related model objects.
+```
+
+
+
+**ManyToManyField** fields accepts a number of extra arguments which are explained in the model field reference. 
+
+
+
+
+
+## Extra fields on many-to-many relationships 
+
+
+
+
+
+When dealing with many-to-many relationships such as mixing and matching pizzas and toppings, a standard **ManyToManyField ** is all you need. 
+
+
+
+Example, the case of an application tracking the musical groups which musicians belong to. A person and the groups of which they are a member can be represented by ManyToManyField. 
+
+
+
+To describe this relationship, take the example below. 
+
+
+
+
+
+```python
+from django.db import models 
+
+class Person(models.Model): 
+    name = models.CharField(max_length=128)
+    
+    def __str__(self): 
+        return self.name 
+    
+    
+class Group(models.Model): 
+    name = models.CharField(max_length=128)
+    members = models.ManyToManyField(Person, thorugh="Membership")
+    
+    def __str__(self): 
+        return self.name 
+    
+
+class Membership(models.Model): 
+    person = models.ForeignKey(Person, on_delete=models.CASCADE)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    date_joined = models.DateField()
+    invite_reason = models.CharField(max_length=64)
+    
+    
+```
+
+
+
+**When you set up the intermediary model, you explicitly specify foreign keys to the models that are involved in the many-to-many relationship. This explicit declaration defines how the two models are related**
+
+
+
