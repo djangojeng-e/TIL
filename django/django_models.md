@@ -494,3 +494,41 @@ class Membership(models.Model):
 
 
 
+# 
+
+# One-to-One relationships 
+
+
+
+
+
+To define a one-to-one relationship, use **OneToOneField**
+
+It requires a positional argument : the class to which the model is related. 
+
+
+
+
+
+
+
+**E.g.** 
+
+If you were building a database of "places", you would build pretty standard stuff such as address, phone number, etc. Then, if you wanted to build a database of restaurants on top of the places, instead of repeating yourself and replicating those fields in the Restaurant model, 
+
+
+
+**you could make Restaurant have OneToOneField to Place. ** 
+
+
+
+Restaurant is a place. In fact, to handle this you'd typically use inheritance, which involves an implicit one-to-one relation. 
+
+
+
+
+
+# Models across files 
+
+
+
