@@ -311,3 +311,35 @@ id = models.AutoField(primary_key=True)
 
 
 
+Each field type, except for ForeignKey, ManyTomanyField and OnetoOneField takes an optional first positional argument - a verbose name. **If the verbose name isn't given, Django will automatically create it using the field's attribute name, converting underscores to spaces.** 
+
+
+
+```python
+first_name = models.Charfield("person's first name", max_length=30)
+```
+
+
+
+ForeignKey, ManyToManyField and OneToOneField require the first argument to be a model calss, so use the Verbose_name keyword argument. 
+
+
+
+```python
+poll = models.ForeignKey(Poll, on_delete=models.CASCADE, verbose_name="the related poll",)
+sites = models.ManyToManyField(Site, verbose_name="list of sites")
+place = models.OneToOneField(Place, on_delete=models.CASCADE, verbose_name="related place",)
+```
+
+
+
+**The convention is not to capitalise the first letter of the verbose_name. Django will automatically capitalise the first letter where it needs to**
+
+
+
+
+
+# Relationships
+
+
+
