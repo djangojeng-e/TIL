@@ -105,4 +105,73 @@ print("variance :", statistics.variance(data))
 #                    Beware the Ideas of March.
 #                    """)
 # server.quit()
+#
+# import zlib
+# s = b'witch which has which witches wrist watch'
+# print(len(s))
+#
+# t = zlib.compress(s)
+# print(len(t))
+#
+# u = zlib.decompress(t)
+# print(u)
+#
+# print(zlib.crc32(s))
 
+from timeit import Timer
+
+a = Timer('t=a; a=b; b=t', 'a=1;b=2').timeit()
+print(a)
+b = Timer('a,b = b,a', 'a=1; b=2').timeit()
+print(b)
+
+#
+#
+# def for_number(number):
+#     for_list = []
+#     for i in range(0, 2000000):
+#         for_list.append(i)
+#
+# def while_number(number):
+#     while_list = []
+#     i = 0
+#     while i < 2000000:
+#         while_list.append(i)
+#         i = i + 1
+#
+# d = Timer(while_number(2000000)).timeit()
+#
+# print(d)
+#
+# c = Timer(for_number(2000000)).timeit()
+# print(c)
+
+def average(values):
+    """Computes the arithmetic mean of a list of numbers.
+
+    >>> print(average([20, 30, 70]))
+    40.0
+
+
+    """
+    return sum(values) / len(values)
+
+import doctest
+
+z = doctest.testmod()
+print(z)
+
+
+import unittest
+
+class TestStatisticalFunctions(unittest.TestCase):
+
+    def test_average(self):
+        self.assertEqual(average([20,30,70]), 40.0)
+        self.assertEqual(round(average([1, 5, 7]), 1), 4.3)
+        with self.assertRaises((ZeroDivisionError)):
+            average([])
+        with self.assertRaises(TypeError):
+            average(20, 30, 70)
+
+unittest.main()

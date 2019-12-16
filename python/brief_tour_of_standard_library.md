@@ -304,3 +304,129 @@ Use Jupyter notebook to test this.
 
 
 
+
+
+# Data Compression 
+
+
+
+Common data archiving and compression formats are directly supported by modules including **zlib, gzip, bz2, lzma, zipfile and tarfile.**
+
+
+
+```python
+import zlib
+s = b'witch which has which witches wrist watch'
+len(s)
+
+t = zlib.compress(s)
+print(t)
+len(t)
+
+z = zlib.decompress(t)
+print(z)
+
+print(zlib.crc32(s))
+```
+
+
+
+
+
+# Performance Measurement 
+
+
+
+Some python users develop a deep interest in knowing the relative performance of different approaches to the same problem Python provides a measurement too. 
+
+
+
+E.g. tuple packing and unpacking feature **timeit** module quickly demonstrates a modest performance advantage. 
+
+
+
+```python
+from timeit import Timer 
+Timer('t=a; a=b; b=t', 'a=1; b=2').timeit()
+Timer('a, b = b, a', 'a = 1; b = 2').timeit()
+
+
+```
+
+
+
+
+
+# Quality Control 
+
+
+
+Developing a high quality software is to write tests for each function as it is developed and to run test frequently during the development process. 
+
+
+
+
+
+**doctest** module provides a tool for scanning a module and validating tests embedded in a program docstring. 
+
+
+
+
+
+```python
+def average(values):
+    """Computes the arithmetic mean of a list of numbers.
+
+    >>> print(average([20, 30, 70]))
+    40.0
+    """
+    return sum(values) / len(values)
+
+import doctest
+doctest.testmod()   # automatically validate the embedded tests
+```
+
+
+
+
+
+The **unittest** is not as effortless as the doctest module. however, it allows a more comprehensive set of tests to be maintained in a separate file. 
+
+
+
+
+
+```python
+class TestStatisticalFunctions(unittest.TestCase):
+
+    def test_average(self):
+        self.assertEqual(average([20,30,70]), 40.0)
+        self.assertEqual(round(average([1, 5, 7]), 1), 4.3)
+        with self.assertRaises((ZeroDivisionError)):
+            average([])
+        with self.assertRaises(TypeError):
+            average(20, 30, 70)
+
+unittest.main()
+```
+
+
+
+
+
+# Batteries included philosophy 
+
+
+
+- xmlrpc.client 
+- xmlrpc.server 
+- email package 
+- json package 
+- csv module 
+- xml.etree.ElementTree
+- xlm.dom
+- xml.sax 
+- sqlite3 
+- gettext
+- locale 
+- codecs 
