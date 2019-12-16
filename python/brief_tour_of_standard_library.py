@@ -83,6 +83,26 @@ print(log)
 
 import statistics
 data = [2.75, 1.75, 1.25, 0.25, 0.5, 1.25, 3.5]
-print(statistics.mean(data))
-print(statistics.median(data))
-print(statistics.variance(data))
+print("mean", statistics.mean(data))
+print("median :", statistics.median(data))
+print("variance :", statistics.variance(data))
+
+#
+# from urllib.request import urlopen
+# with urlopen('http://tycho.usno.navy.mil/cgi-bin/timer.pl') as response:
+#     for line in response:
+#         line = line.decode('utf-8')     # Decoding the binary data to text.
+#         if 'EST' in line or 'EDT' in line:  # Look for Eastern Time
+#             print(line)
+#
+# import smtplib
+#
+# server = smplib.SMTP('localhost')
+# server.sendmail('soothsayer@exmple.org', 'jcaesar@exmple.org',
+#                 """To : jcaesar@example.org
+#                    From : soothsayer@example.org
+#
+#                    Beware the Ideas of March.
+#                    """)
+# server.quit()
+

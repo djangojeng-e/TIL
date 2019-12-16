@@ -239,3 +239,68 @@ print(statistics.variance(data))
 
 
 # Internet Access
+
+
+
+
+
+There are a number of modules for accessing the internet and processing internet protocols. Two representative modules would be **urllib.request** and **smtplib**
+
+
+
+```python
+from urllib.request import urlopen
+with urlopen('http://tycho.usno.navy.mil/cgi-bin/timer.pl') as response:
+    for line in response:
+        line = line.decode('utf-8')  # Decoding the binary data to text.
+        if 'EST' in line or 'EDT' in line:  # look for Eastern Time
+            print(line)
+
+
+
+import smtplib
+server = smtplib.SMTP('localhost')
+server.sendmail('soothsayer@example.org', 'jcaesar@example.org',
+"""To: jcaesar@example.org
+From: soothsayer@example.org
+
+Beware the Ides of March.
+""")
+server.quit()
+```
+
+
+
+The example requires a mailserver running on localhost though. 
+
+
+
+
+
+# Dates and Times 
+
+
+
+
+
+The **datetime** module supplies classes for manipulating dates and times in simple or complex ways. 
+
+Dates can be easily constructed and formatted. 
+
+
+
+Use Jupyter notebook to test this. 
+
+
+
+```python
+# %m = month 
+# %a = day in number 
+# %y = year in number (short form only 2 digits)
+# %b = Month in Word (e.g. December -> Dec)
+# %Y = Year in number (Full format e.g. 2019)
+# %A = Day of the week (e.g. Monday)
+```
+
+
+
