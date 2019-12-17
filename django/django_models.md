@@ -532,3 +532,96 @@ Restaurant is a place. In fact, to handle this you'd typically use inheritance, 
 
 
 
+It's pretty ok to relate a model to one from another app. To do this, import the related model at the top of the file where your model is defined. 
+
+
+
+```python
+from django.db import models 
+from geography.models import Zipcode 
+
+class Restaurant(models.Model):
+    #...
+    zip_code = models.ForeignKey(
+    ZipCode, 
+    on_delete=models.SET_NULL, 
+    blank=True, 
+    null=True,)
+```
+
+
+
+
+
+# Field Name restrictions 
+
+
+
+**Django places some restrictions on model field names:**
+
+
+
+
+
+1. A field name cannot be a Python reserved word. It will lead to a Python Syntax error 
+
+
+
+```python
+class Example(models.Model): 
+    pass = models.IntegerField()
+
+# 'pass' is a reserved word! 
+
+```
+
+2. A field name cannot contain more than one underscore in a row, due to the way Django's query lookup syntax works 
+
+
+
+
+
+```python
+class Example(models.Model): 
+    foo__bar = models.IntegerField()
+    
+   # 'foo__bar' has two underscores. 
+
+
+```
+
+
+
+
+
+3. A field name cannot end with an underscore 
+
+
+
+However, SQL reserved words such as join, where or select are allowed as model field names as Django escapes all database table names and column names in every underlying SQL query. 
+
+
+
+
+
+# Meta Options 
+
+
+
+
+
+```python
+from django.db import models 
+
+class Ox(models.Model): 
+    horn_length = models.IntegerField()
+    
+    class Meta:
+        ordering = ["horn_length"]
+        verbose_name_plural = "oxen"
+        
+```
+
+
+
+Model Metadata is not a field. 
