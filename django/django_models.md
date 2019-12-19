@@ -625,3 +625,19 @@ class Ox(models.Model):
 
 
 Model Metadata is not a field. 
+
+
+
+
+
+# objects.get(name__contain="contain")
+
+# objects.filter(name_contain="contain")
+
+
+
+objects.get extracts the data the unique. If no unique data is extracted, using get method will raise the error. 
+
+
+
+On the other hand, objects.filter() will list out the data meeting up the conditions in filter().
