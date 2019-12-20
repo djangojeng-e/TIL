@@ -1,19 +1,18 @@
 from django.db import models
 
 # Create your models here.
-from django.db.models import Model
 
 
-class Topping(models.Model):
+class Feature(models.Model):
     name = models.CharField(max_length=30)
 
     def __str__(self):
         return self.name
 
 
-class Pizza(models.Model):
+class Room(models.Model):
     name = models.CharField(max_length=30)
-    toppings = models.ManyToManyField(Topping)
+    features = models.ManyToManyField(Feature)
 
     def __str__(self):
         return self.name
