@@ -43,7 +43,8 @@ for binary_nums, decimal_nums in binary_decimal_dict.items():
         print(f'No. {binary_nums} is not divisible by 5.')
 
 
-#
+# The below is the suggested solution. 
+
 # Solution:
 # value = []
 # items=[x for x in raw_input().split(',')]
