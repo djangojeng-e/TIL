@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'hotel',
     'recursive',
     'm2mextrafields',
+    'm2mbasic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
