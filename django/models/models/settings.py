@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     # 'many_to_many.apps.ManyToManyConfig',
     'hotel',
+    'recursive',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
