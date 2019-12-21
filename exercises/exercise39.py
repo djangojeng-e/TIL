@@ -15,4 +15,5 @@ for words in user_sentence:
 print("LETTERS : ", LETTERS)
 print("DIGITS :", DIGITS)
 
-
+for i in range(0, 3000000):
+    print(i)
