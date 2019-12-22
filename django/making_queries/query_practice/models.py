@@ -1,21 +1,6 @@
-# Making Queries 
-
-
-
-Once data models have been created, Django automatically gives a database Abstraction API that can create, retrieve, updated and delete objects. 
-
-
-
-The topic is based on the following example. 
-
-
-
-
-
-```python
 from django.db import models
 
-
+# Create your models here.
 
 class Blog(models.Model):
     name = models.CharField(max_length=100)
@@ -44,28 +29,5 @@ class Entry(models.Model):
 
     def __str__(self):
         return self.headline
-
-```
-
-
-
-
-
-# Creating objects 
-
-
-
-To represent database-table in Python obejcts, Django uses an intuitive system. 
-
-
-
-**Model class represents a database table**
-
-**Instance of that class** represents a particular record in the database table. 
-
-
-
-To create an object, instantiate it using keyword arguments to the model class and call **save()** to save it to the database. 
-
 
 
