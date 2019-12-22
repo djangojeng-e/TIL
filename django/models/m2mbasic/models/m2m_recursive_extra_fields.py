@@ -12,7 +12,7 @@ class FacebookUser(models.Model):
 class InstagramUser(models.Model):
     name = models.CharField(max_length=20)
     following = models.ManyToManyField(
-        'self', through='Relation', related_name='followers' symmetrical=False)
+        'self', through='Relation', related_name='followers', symmetrical=False)
 
     def __str__(self):
         return self.name
