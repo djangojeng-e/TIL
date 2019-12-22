@@ -636,8 +636,84 @@ Model Metadata is not a field.
 
 
 
-objects.get extracts the data the unique. If no unique data is extracted, using get method will raise the error. 
+> objects.get extracts the data the unique. If no unique data is extracted, using get method will raise the error. 
+>
+> 
+>
+> On the other hand, objects.filter() will list out the data meeting up the conditions in filter().
 
 
 
-On the other hand, objects.filter() will list out the data meeting up the conditions in filter().
+
+
+# Model Attributes 
+
+
+
+**objects**  - The most important attribute of  model is the Manager. It is the interface through database query operations are provided to Django models and is used to retrieve the instances from the Database. 
+
+
+
+
+
+# Model Methods 
+
+
+
+
+
+Custom methods on a model can be added custom "row-level" functionality to the objects. **Manager** methods are intended to do "table-wide" things, model methods should act on a particular model instance. 
+
+
+
+Demonstrating the custom methods:
+
+
+
+
+
+```python
+from django.db import models 
+
+class Person(models.Model):
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    birth_date = models.DateField()
+
+    def baby_boomer_status(self):
+        "Returns the persons's baby-boomer status."
+		import datetime 
+        if self.birth_date < datetime.date(1945, 8, 1):
+            return "Pre-boomer"
+        elif self.birth_date < datetime.date(1965, 1, 1): 
+            return "Baby boomer"
+        else:
+            return "Post-boomer"
+        
+       @property 
+    
+    	def full_name(self):
+            "Returns the person's full name."
+            return '%s %s' % (self.first_name, self.last_name)
+        
+        
+```
+
+
+
+
+
+**Magic Method** 
+
+
+
+```
+__str__() 
+
+# A python "magic method" returns a string representation of any object. 
+# This is used in Python and Django whenever a model instance needs to be coerced and displayed as a plain string. 
+
+# This happens when you display an obejct in an interactive console or in the admin. 
+
+```
+
