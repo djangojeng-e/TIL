@@ -475,3 +475,242 @@ Entry.objects.get(headline__iendswith="k")
 
 
 
+Django offers a powerful and intuitive way to follow relationships in lookups,. To span a relationship, use the field name of related fields across models. 
+
+
+
+```python
+# Retrieves all Entry objects with Blog whose name is 'Beatles Blog'
+Entry.objects.filter(blog__name='Beatles Blog')
+
+# Retrieves all Blog obejcts which have at least one Entry whose headline contains 'Lennon' 
+
+Blog.objects.filter(entry__headline__contains='Lennon')
+
+# If you are filtering across multiple relationships and one of the intermediate models 
+# doesn't have a value that meets the filter condition, 
+# Django will treat it as if there is an empty but valid object there. 
+
+Blog.objects.filter(entry__authors__name='Lennon')
+
+
+# If there was no author associated with an entry, it would be treated as 
+# if there was also no name attached, rather than raising an enrror 
+# because of the missing author. 
+
+Blog.objeccts.filter(entery__authors__name__isnull=True)
+
+# This will return Blog objects that have an empty name on the author and those 
+# which have an empty author on the entry. 
+
+Blog.objects.filter(entry__authors__isnull=False, entry__authors__name__isnull=True)
+
+
+
+
+```
+
+
+
+## Spanning Multi-Valued Relationships 
+
+
+
+
+
+```python
+# To select all blogs that contain entries with both "Lennon" in the headline 
+# That were published in 2008 (the same entry satisfying both conditions)
+
+Blog.objects.filter(entry__headline__contains='Lennon',
+                   entry__pub_date__year=2008)
+
+
+# To select all blogs that contain an entry with "Lennon" in the headline as well as 
+# an entry that was published in 2008,
+
+Blog.objects.filter(entry__headline__contains='Lennon').filter(entry__pub_date__year=2008)
+```
+
+
+
+# The pk lookup shortcut 
+
+
+
+For Convenience, Django provides a pk lookup shortcut, which stands for ''primary key'' 
+
+
+
+```python
+
+
+# In the example of Blog models, 
+# the primary key is the id field 
+# Three statements below are equivalent 
+
+
+Blog.objects.get(id__exact=14)		# Explicit form 
+Blog.objects.get(id=14)				# __exact is implied 
+Blog.objects.get(pk=14)				# pk implies id__exact 
+
+
+```
+
+
+
+**The use of pk isn't limited to __exact queries** - any query term can be combined with pk to perform a query on the primary key of a model 
+
+
+
+```python
+# Get blogs entries with id 1, 4 and 7 
+Blog.objects.filter(pk__in=[1,4,7])
+
+# Get all blog entries with id > 14 
+Blog.objects.filter(pk__gt=14)
+
+
+```
+
+
+
+
+
+**pk lookups also work across joins.**
+
+
+
+```python
+Entry.objects.filter(blog__id__exact=3)		# Explicit form 
+Entry.objects.filter(blog__id=3)			# __exact is implied 
+Entry.objects.filter(blog__pk=3)			# __pk implies __id__exact 
+```
+
+
+
+
+
+
+
+# Comparing objects 
+
+
+
+To compare two model instances, use the standard Python comparison operator, the double equal sign == 
+
+
+
+
+
+```python
+some_entry == other_entry 
+some_entry.id == other_entry.id 
+```
+
+
+
+
+
+# Deleting objects 
+
+
+
+delete() method immediately deletes the object and returns the number of objects deleted and a dictionary with the number of deletions per object type 
+
+
+
+
+
+```
+e.delete() 
+
+# This will return 
+
+# (1, {'weblog.Entry': 1})
+```
+
+
+
+
+
+**Every QuerySet has a delete() method, which deletes all members of that QuerySet**
+
+
+
+```python
+
+Entry.objects.filter(pub_date__year=2005).delete()
+
+```
+
+
+
+**When django deletes an object, it emulates the behaviour of the SQL constraint ON DELETE CASCADE** - Any objects which had foreign keys pointing at the object to be deleted will be deleted along with it. 
+
+
+
+```python
+b = Blog.objects.get(pk=1)
+# This will delete the Blog and all of its Entry objects. 
+
+b.delete()
+```
+
+
+
+
+
+**NB :** delete() is the only QuerySet method that is not exposed on a manager itself preventing from accident requests like Entry.objects.delete(), and deleting all the entries.  
+
+
+
+
+
+# Copying model instances 
+
+
+
+There is no built-in method for copying model instances, it is possible to easily create new instance with all fields' values copied. 
+
+
+
+```python
+
+blog = Blog(name='My blog', tagline='Blogging is easy')
+blog.save() # blog.pk == 1 
+
+blog.pk = None 
+blog.save()	# blog.pk == 2 
+
+
+```
+
+
+
+
+
+# Updating multiple objects at once 
+
+
+
+
+
+Sometimes you want to set a field to a particular value for all the objects in a QuerySet. update() method can achieve this. 
+
+
+
+```python
+
+# Update all the headlines with pub_date in 2007. 
+
+Entry.objects.filter(pub_date__year=2007).update(headline='Everything is the same')
+
+```
+
+
+
+
+
+# Related objects 
+
