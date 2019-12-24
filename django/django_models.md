@@ -717,3 +717,95 @@ __str__()
 
 ```
 
+
+
+
+
+# Model Inheritance
+
+
+
+Model inheritance in Django works almost identically to the way normal class inheritance works in Python. The only decision you have to make is whether you want the parent models to be models in their own right or if the parents are just holders of common information that will only be visible through the child models. 
+
+
+
+**3 styles of inheritance that are possible in Django**
+
+
+
+1. Just use the parent class to hold information that you don't want to have to type out for each child model. This class is not going to ever be used in isolation. **-> Abstract base classes**
+
+
+
+2. If you are subclassing an existing model (maybe something from another application entirely) and want each model to have its own database table -> **Multi-table inheritance**
+
+
+
+3. If you only want to modify the Python-level behavior of a model, without changin the models fields in any way, use **Proxy models**
+
+
+
+
+
+# Abstract Base Classes 
+
+
+
+Abstract base classes are useful when you want to put some common information into a number of other models. **abstract=True** in the Meta class. This model will not be used to create any database table. When it is used as a base class for other models, its fields will be added to those of the child class. 
+
+
+
+
+
+```python
+from django.db import models 
+
+class CommonInfo(models.Model):
+    name = models.CharField(max_length=100)
+    age = models.PositiveIntegerField()
+    
+    class Meta:
+        abstract = True 
+        
+class Student(CommonInfo):
+    home_group = models.CharField(max_length=5)
+    
+
+```
+
+
+
+**CommonInfo** model cannot be used as normal Django model, since it is an abstract base class. It does not generate a database table or have a manager, and cannot be instantiated or saved directly. 
+
+
+
+This provides a way to factor out common information at the Python level, while still only creating one database table per child model at the database level. 
+
+
+
+## Meta Inheritance 
+
+
+
+When an abstract base class is created, there is Meta inner class you declared in the base class available as an attribute. **If a child class does not declare its own Meta Class**, it will inherit the parent's Meta. 
+
+
+
+
+
+```python
+from django.db import models 
+
+class COmmonInfo(models.Model):
+    # ... 
+    class Meta:
+        abstract = True 
+        ordering = ['name']
+        
+class Student(CommonInfo):
+    # ... 
+    class Meta(CommonInfo.Meta): 
+        db_table = 'student_info'
+        
+```
+
