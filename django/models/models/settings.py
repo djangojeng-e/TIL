@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'database_models',
     'django_extensions',
+    'field_reference',
 
 ]
 
