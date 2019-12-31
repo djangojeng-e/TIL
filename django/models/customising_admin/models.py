@@ -13,9 +13,8 @@ class Author(models.Model):
 
 
 class Website(models.Model):
-    url = models.URLField
+    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    url = models.URLField(max_length=300)
     title = models.CharField(max_length=30)
     content = models.TextField
 
-    def __str__(self):
-        return self.url
