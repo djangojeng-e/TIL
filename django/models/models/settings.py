@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'field_reference',
     'customising_admin',
+    'question_and_answer',
 
 ]
 
