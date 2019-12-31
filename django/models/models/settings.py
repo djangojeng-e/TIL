@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'database_models',
     'django_extensions',
     'field_reference',
+    'customising_admin',
 
 ]
 
