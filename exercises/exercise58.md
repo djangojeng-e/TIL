@@ -2,8 +2,7 @@ The exercise has been brought from https://github.com/zhiwehu/Python-programming
 
 Refer to the official solutions on the same page.
 
-Refer to the solution created by djangojeng-e in .py format. exercise57.py
-
+Refer to the solution created by djangojeng-e in .py format. exercise58.py
 
 Question:
 Define a function which can print a dictionary where the keys are numbers between 1 and 3 (both included) and the values are square of keys.
