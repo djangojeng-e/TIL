@@ -84,3 +84,7 @@ Let's Encrypt
 
 
 
+```bash
+sudo docker run --rm -it --name certbot -v '/etc/letsencrypt:/etc/letsencrypt' -v '/var/lib/letsencrypt:/var/lib/letsencrypt' certbot/certbot certonly
+```
+
