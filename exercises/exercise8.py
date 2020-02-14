@@ -39,4 +39,41 @@ while user1_input != user2_input:
             break 
 
 
+# Another Solution attempted on 14/2/2020
 
+while True:
+    print("Please input your command")
+    print("1 : Play Rock, Scissors and Paper Game")
+    print("0 : Exit the Game\n")
+    command = int(input("\nEnter your command"))
+
+    if command == 0:
+        break
+    elif command == 1:
+        choices = []
+        for i in range(1, 3):
+            plays = ['Rock', 'Scissors', 'Players']
+            print(f'Enter play for user {i}\n')
+            print("1. Rock \n",
+                  "2. Scissors \n",
+                  "3. Paper\n",)
+            choice = int(input("\nPlease enter your choice"))
+            if choice == 1:
+                choices.append("Rock")
+            if choice == 2:
+                choices.append("Scissors")
+            if choice == 3:
+                choices.append("Paper")
+        if choices[0] == choices[1]:
+            print("===" * 10)
+            print("It is a draw")
+            print("===" * 10)
+        else:
+            if choices[0] == "Rock" and choices[1] == "Scissors":
+                print("\nPlayer 1 is the winner\n")
+            elif choices[0] == "Scissors" and choices[1] == "Paper":
+                print("\nPlayer 1 is the winner\n")
+            elif choices[0] == "Paper" and choices[1] == "Rock":
+                print("\nPlayer1 is the winner\n")
+            else:
+                print("\nPlayer 2 is the winner\n")
