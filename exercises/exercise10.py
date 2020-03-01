@@ -10,6 +10,10 @@ else:
 
 print(c)
 
+# Solution on 01/03/2020
+
+c = [number for number in a if number in b]
+print(c)
 
 # Refer to the solution below for the original answer. 
 
